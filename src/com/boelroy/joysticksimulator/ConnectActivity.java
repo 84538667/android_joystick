@@ -16,7 +16,7 @@ public class ConnectActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
-        Button btn = (Button)findViewById(R.id.start);
+        Button btn = (Button)findViewById(R.id.begin);
         final EditText edt = (EditText)findViewById(R.id.editview);
         btn.setOnClickListener(new OnClickListener() {
 			

@@ -1,12 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@drawable/common_back">
+    <ImageView
+        android:contentDescription="@string/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/direct_back"
+        android:layout_centerVertical="true"/>
     <com.boelroy.joysticksimulator.rudder.Rudder
              android:id="@+id/rudder" 
-             android:layout_width="300dip"
-             android:layout_height="300dip"
-             android:layout_centerInParent="true"
+             android:layout_width="200dip"
+             android:layout_height="200dip"
+             android:layout_marginLeft="30dip"
              android:layout_centerVertical="true"/>
-
+	<ImageView
+	    android:contentDescription="@string/app_name"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:src="@drawable/action"
+	    android:layout_alignParentRight="true"
+	    android:layout_centerVertical="true"
+	    />
+	<Button
+	    android:id="@+id/button_y"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/y_button"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="110dip"
+	    android:layout_marginTop="80dip"/>
+	<Button
+	    android:id="@+id/button_x"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/x_button"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="180dip"
+	    android:layout_marginTop="155dip"/>
+	<Button
+	    android:id="@+id/button_a"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/a_button"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="40dip"
+	    android:layout_marginTop="155dip"/>
+	<Button 
+	    android:id="@+id/button_b"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/b_button"
+	    android:layout_alignParentRight="true"
+	    android:layout_marginRight="110dip"
+	    android:layout_marginTop="230dip"/>
+	<Button
+	    android:id="@+id/button_start"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/start_button"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="200dip"/>
+	<ImageView 
+	    android:contentDescription="@string/app_name"
+	    android:layout_marginLeft="310dip"
+	    android:layout_marginTop="180dip"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/start_text"/>
+	<Button
+	    android:id="@+id/button_select"
+	    android:layout_centerHorizontal="true"
+	    android:layout_marginTop="120dip"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/select_button"/>
+	<ImageView
+	    android:contentDescription="@string/app_name"
+	    android:layout_marginLeft="300dip"
+	    android:layout_marginTop="90dip"
+	    android:layout_height="wrap_content"
+	    android:layout_width="wrap_content"
+	    android:background="@drawable/select_text"/>
 </RelativeLayout>

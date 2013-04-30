@@ -1,6 +1,10 @@
 package com.boelroy.joysticksimulator.rudder;
 
+import com.boelroy.joysticksimulator.R;
+
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -20,8 +24,7 @@ public class Rudder extends SurfaceView implements Runnable,Callback{
     private Thread mThread;
     private Paint  mPaint;
     private Point  mRockerPosition; //摇杆位置
-    private Point  mCtrlPoint = new Point(150,150);//摇杆起始位置
-    private int    mRudderRadius = 60;//摇杆半径
+    private Point  mCtrlPoint = new Point(190,190);//摇杆起始位置
     private int    mWheelRadius = 120;//摇杆活动范围半径
     private RudderListener listener = null; //事件回调接口
     public static final int ACTION_RUDDER = 1 , ACTION_ATTACK = 2; // 1：摇杆事件 2：按钮事件（未实现）
@@ -63,10 +66,13 @@ public class Rudder extends SurfaceView implements Runnable,Callback{
             try {
                 canvas = mHolder.lockCanvas();
                 canvas.drawColor(Color.TRANSPARENT,Mode.CLEAR);//清除屏幕
-                mPaint.setColor(Color.CYAN);
+                mPaint.setColor(Color.TRANSPARENT);
                 canvas.drawCircle(mCtrlPoint.x, mCtrlPoint.y, mWheelRadius, mPaint);//绘制范围
                 mPaint.setColor(Color.RED);
-                canvas.drawCircle(mRockerPosition.x, mRockerPosition.y, mRudderRadius, mPaint);//绘制摇杆
+                Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.direct_button);
+                int height = bmp.getHeight();
+                int width = bmp.getWidth();
+                canvas.drawBitmap(bmp, mRockerPosition.x - width / 2, mRockerPosition.y - height/ 2, mPaint);//绘制摇杆
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

@@ -8,6 +8,10 @@
 package com.boelroy.joysticksimulator;
 
 public final class R {
+    public static final class array {
+        public static final int action_button=0x7f040000;
+        public static final int wheel_action_button=0x7f040001;
+    }
     public static final class attr {
     }
     public static final class dimen {
@@ -17,35 +21,88 @@ public final class R {
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
-        public static final int activity_horizontal_margin=0x7f040000;
-        public static final int activity_vertical_margin=0x7f040001;
+        public static final int activity_horizontal_margin=0x7f050000;
+        public static final int activity_vertical_margin=0x7f050001;
     }
     public static final class drawable {
-        public static final int ic_launcher=0x7f020000;
+        public static final int a=0x7f020000;
+        public static final int a_button=0x7f020001;
+        public static final int a_click=0x7f020002;
+        public static final int action=0x7f020003;
+        public static final int b=0x7f020004;
+        public static final int b_button=0x7f020005;
+        public static final int b_click=0x7f020006;
+        public static final int common=0x7f020007;
+        public static final int common_back=0x7f020008;
+        public static final int common_click=0x7f020009;
+        public static final int common_stick=0x7f02000a;
+        public static final int direct_back=0x7f02000b;
+        public static final int direct_button=0x7f02000c;
+        public static final int go=0x7f02000d;
+        public static final int go_button=0x7f02000e;
+        public static final int go_click=0x7f02000f;
+        public static final int ic_launcher=0x7f020010;
+        public static final int joystick_select_back=0x7f020011;
+        public static final int nitrogen=0x7f020012;
+        public static final int nitrogen_button=0x7f020013;
+        public static final int nitrogen_click=0x7f020014;
+        public static final int select_back=0x7f020015;
+        public static final int select_back_click=0x7f020016;
+        public static final int select_button=0x7f020017;
+        public static final int select_text=0x7f020018;
+        public static final int start_back=0x7f020019;
+        public static final int start_back_click=0x7f02001a;
+        public static final int start_button=0x7f02001b;
+        public static final int start_text=0x7f02001c;
+        public static final int stop=0x7f02001d;
+        public static final int stop_button=0x7f02001e;
+        public static final int stop_click=0x7f02001f;
+        public static final int wheel=0x7f020020;
+        public static final int wheel_back=0x7f020021;
+        public static final int wheel_click=0x7f020022;
+        public static final int wheel_direct=0x7f020023;
+        public static final int wheel_stick=0x7f020024;
+        public static final int x=0x7f020025;
+        public static final int x_button=0x7f020026;
+        public static final int x_click=0x7f020027;
+        public static final int y=0x7f020028;
+        public static final int y_button=0x7f020029;
+        public static final int y_click=0x7f02002a;
     }
     public static final class id {
-        public static final int action_settings=0x7f080005;
-        public static final int editview=0x7f080001;
-        public static final int joy_select=0x7f080003;
-        public static final int joysticktype=0x7f080004;
-        public static final int rudder=0x7f080000;
-        public static final int start=0x7f080002;
+        public static final int action_settings=0x7f09000f;
+        public static final int begin=0x7f090008;
+        public static final int button_a=0x7f090003;
+        public static final int button_b=0x7f090004;
+        public static final int button_select=0x7f090006;
+        public static final int button_start=0x7f090005;
+        public static final int button_x=0x7f090002;
+        public static final int button_y=0x7f090001;
+        public static final int common_stick=0x7f090009;
+        public static final int editview=0x7f090007;
+        public static final int go=0x7f09000c;
+        public static final int joysticktype=0x7f09000e;
+        public static final int nitrogen=0x7f09000d;
+        public static final int rudder=0x7f090000;
+        public static final int stop=0x7f09000b;
+        public static final int wheel_stick=0x7f09000a;
     }
     public static final class layout {
         public static final int activity_comonjoystick=0x7f030000;
         public static final int activity_connect=0x7f030001;
         public static final int activity_joystickselect=0x7f030002;
-        public static final int joystick_item=0x7f030003;
+        public static final int activity_wheeljoystick=0x7f030003;
+        public static final int joystick_item=0x7f030004;
     }
     public static final class menu {
-        public static final int connect=0x7f070000;
+        public static final int connect=0x7f080000;
     }
     public static final class string {
-        public static final int action_settings=0x7f050001;
-        public static final int app_name=0x7f050000;
-        public static final int connect=0x7f050004;
-        public static final int hello_world=0x7f050002;
-        public static final int hint=0x7f050003;
+        public static final int action_settings=0x7f060001;
+        public static final int app_name=0x7f060000;
+        public static final int connect=0x7f060004;
+        public static final int hello_world=0x7f060002;
+        public static final int hint=0x7f060003;
     }
     public static final class style {
         /** 
@@ -69,10 +126,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f060000;
+        public static final int AppBaseTheme=0x7f070000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f060001;
+        public static final int AppTheme=0x7f070001;
     }
 }

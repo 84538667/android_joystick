@@ -11,7 +11,7 @@
         android:layout_centerInParent="true"
         android:hint="@string/hint"/>
 	<Button
-	    android:id="@+id/start"
+	    android:id="@+id/begin"
 	    android:text="@string/connect"
 	    android:layout_width="wrap_content"
 	    android:layout_height="wrap_content"

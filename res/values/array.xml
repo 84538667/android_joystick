@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="action_button">
+        <item>@id/button_y</item>
+        <item>@id/button_x</item>
+        <item>@id/button_a</item>
+        <item>@id/button_b</item>
+        <item>@id/button_start</item>
+        <item>@id/button_select</item>
+    </string-array>
+    
+    <string-array name="wheel_action_button">
+        <item>@id/stop</item>
+        <item>@id/go</item>
+        <item>@id/nitrogen</item>
+    </string-array>
+</resources>

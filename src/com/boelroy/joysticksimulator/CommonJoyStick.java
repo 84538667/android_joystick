@@ -11,18 +11,26 @@ import com.boelroy.joysticksimulator.rudder.Rudder;
 import com.boelroy.joysticksimulator.rudder.Rudder.RudderListener;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.TypedArray;
 import android.os.Bundle;
+import android.os.Vibrator;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
 public class CommonJoyStick extends Activity {
 	String mIp;
-	private Socket socket = null;
+	final static String[] keys = {"KE_Y","KE_X","KE_A","KE_B","KE_S","KEY_E"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
+		this.setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
 		setContentView(R.layout.activity_comonjoystick);
 		//Intent intent= this.getIntent();
+		
 		
 		Rudder rudder = (Rudder)findViewById(R.id.rudder);
 		rudder.setRudderListener(new RudderListener() {
@@ -31,25 +39,45 @@ public class CommonJoyStick extends Activity {
 			public void onSteeringWheelChanged(int action, int angle) {
 				// TODO Auto-generated method stub
 				if(angle >= 360 - 30 || angle < 30){
-					sendMsg("right");
+					sendMsg("righ");
 				}else if(angle >= 60 && angle < 120){
-					sendMsg("upto");
+					sendMsg("UPTO");
 				}else if(angle >= 150 && angle < 210){
-					sendMsg("left");
+					sendMsg("LEFT");
 				}else{
-					sendMsg("down");
+					sendMsg("DOWN");
 				}
 			}
 		});
+		
+		TypedArray ta = this.getResources().obtainTypedArray(R.array.action_button);
+		for(int i = 0; i < ta.length();i++){
+			int rid = ta.getResourceId(i, -1);
+			if(rid != -1){
+				Button btn = (Button)this.findViewById(rid);
+				final int index = i;
+				btn.setOnClickListener(new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						sendMsg(keys[index]);
+						getVibator();
+					}
+				});
+			}
+		}
+		ta.recycle();
 	}
 	
-	private void sendMsg(final String direct){
+	public static void sendMsg(final String direct){
 		Thread t = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
+				Socket socket = null;
 				try {
-					socket = new Socket("192.168.1.35", 8885);
+					socket = new Socket("192.168.1.3", 8885);
 					PrintWriter out = new PrintWriter(new BufferedWriter(  
 		                    new OutputStreamWriter(socket.getOutputStream())), true);
 					
@@ -65,8 +93,9 @@ public class CommonJoyStick extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}finally {  
-		            try {  
-		                socket.close();
+		            try {
+		            	if(socket != null)
+		            		socket.close();
 		            } catch (IOException e) {  
 		                e.printStackTrace();  
 		            }  
@@ -74,6 +103,12 @@ public class CommonJoyStick extends Activity {
 			}
 		});
 		t.start();
+	}
+	
+	private void getVibator(){
+		Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
+        long [] pattern = {10,50};   // Í£Ö¹ ¿ªÆô Í£Ö¹ ¿ªÆô   
+        vibrator.vibrate(pattern,-1); 
 	}
 
 }

@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <android.support.v4.view.ViewPager
-        android:id="@+id/joy_select"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        </android.support.v4.view.ViewPager>
-	    
+    android:layout_height="match_parent"
+    android:background="@drawable/joystick_select_back">
+	    <ImageView
+	        android:id="@+id/common_stick"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/common_stick"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="50dip"
+	        android:contentDescription="@string/app_name"/>
+	    <ImageView 
+	        android:id="@+id/wheel_stick"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:src="@drawable/wheel_stick"
+	        android:layout_centerVertical="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_marginRight="50dip"
+	        android:contentDescription="@string/app_name"/>
 </RelativeLayout>
