@@ -25,11 +25,11 @@ public class WheelJoyStick extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		this.setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
-		setContentView(R.layout.activity_wheeljoystick);
+		this.setContentView(R.layout.activity_wheeljoystick);
 		GravitySensor gs = new GravitySensor();
 		gs.Listen((SensorManager)getSystemService(SENSOR_SERVICE), "192.168.1.3");
 		
-		TypedArray ta = this.getResources().obtainTypedArray(R.array.action_button);
+		TypedArray ta = this.getResources().obtainTypedArray(R.array.wheel_action_button);
 		for(int i = 0; i < ta.length();i++){
 			int rid = ta.getResourceId(i, -1);
 			if(rid != -1){
@@ -87,7 +87,7 @@ public class WheelJoyStick extends Activity {
 	
 	private void getVibator(){
 		Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);  
-        long [] pattern = {10,50};   // Í£Ö¹ ¿ªÆô Í£Ö¹ ¿ªÆô   
+        long [] pattern = {10,50};   // Í£Ö¹ ¿ªÆô 
         vibrator.vibrate(pattern,-1); 
 	}
 }

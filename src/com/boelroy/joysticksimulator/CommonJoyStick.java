@@ -15,13 +15,15 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 public class CommonJoyStick extends Activity {
 	String mIp;
-	final static String[] keys = {"KE_Y","KE_X","KE_A","KE_B","KE_S","KEY_E"};
+	final static String[] keysUp = {"KE_Y","KE_X","KE_AU","KE_BU","KE_SU","KEY_EU"};
+	final static String[] keysDonw = {"KE_Y","KE_X","KE_AD","KE_BD","KE_SD","KEY_ED"};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,13 +58,24 @@ public class CommonJoyStick extends Activity {
 			if(rid != -1){
 				Button btn = (Button)this.findViewById(rid);
 				final int index = i;
-				btn.setOnClickListener(new OnClickListener() {
+				btn.setOnTouchListener(new OnTouchListener() {
 					
 					@Override
-					public void onClick(View v) {
+					public boolean onTouch(View v, MotionEvent event) {
 						// TODO Auto-generated method stub
-						sendMsg(keys[index]);
-						getVibator();
+						switch(event.getAction()){
+							case MotionEvent.ACTION_DOWN:
+								sendMsg(keysDonw[index]);
+								getVibator();
+								break;
+							case MotionEvent.ACTION_UP:
+								sendMsg(keysUp[index]);
+								getVibator();
+								break;
+							default :
+								break;
+						}
+						return true;
 					}
 				});
 			}
