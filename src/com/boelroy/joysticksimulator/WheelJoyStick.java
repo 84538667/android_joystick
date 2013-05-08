@@ -13,13 +13,15 @@ import android.content.res.TypedArray;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Vibrator;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 public class WheelJoyStick extends Activity {
 
-	final static String[] keys = {"KE_1","KE_2","KE_3"};
+	final static String[] keysUp = {"KE_1U","KE_2U","KE_3U"};
+	final static String[] keysDown = {"KE_1D","KE_2D","KE_3D"};
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -27,7 +29,7 @@ public class WheelJoyStick extends Activity {
 		this.setTheme(android.R.style.Theme_NoTitleBar_Fullscreen);
 		this.setContentView(R.layout.activity_wheeljoystick);
 		GravitySensor gs = new GravitySensor();
-		gs.Listen((SensorManager)getSystemService(SENSOR_SERVICE), "192.168.1.3");
+		gs.Listen((SensorManager)getSystemService(SENSOR_SERVICE), "192.168.1.4");
 		
 		TypedArray ta = this.getResources().obtainTypedArray(R.array.wheel_action_button);
 		for(int i = 0; i < ta.length();i++){
@@ -35,13 +37,23 @@ public class WheelJoyStick extends Activity {
 			if(rid != -1){
 				Button btn = (Button)this.findViewById(rid);
 				final int index = i;
-				btn.setOnClickListener(new OnClickListener() {
+				btn.setOnTouchListener(new OnTouchListener() {
 					
 					@Override
-					public void onClick(View v) {
+					public boolean onTouch(View v, MotionEvent event) {
 						// TODO Auto-generated method stub
-						sendMsg(keys[index]);
-						getVibator();
+						switch(event.getAction()){
+							case MotionEvent.ACTION_DOWN:
+								sendMsg(keysDown[index]);
+								getVibator();
+								break;
+							case MotionEvent.ACTION_UP:
+								sendMsg(keysUp[index]);
+								break;
+							default :
+								break;
+						}
+						return true;
 					}
 				});
 			}
@@ -57,7 +69,7 @@ public class WheelJoyStick extends Activity {
 			public void run() {
 				Socket socket = null;
 				try {
-					socket = new Socket("192.168.1.35", 8886);
+					socket = new Socket("192.168.1.4", 8886);
 					PrintWriter out = new PrintWriter(new BufferedWriter(  
 		                    new OutputStreamWriter(socket.getOutputStream())), true);
 					

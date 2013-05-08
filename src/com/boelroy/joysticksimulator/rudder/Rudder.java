@@ -27,6 +27,7 @@ public class Rudder extends SurfaceView implements Runnable,Callback{
     private Point  mCtrlPoint = new Point(190,190);//摇杆起始位置
     private int    mWheelRadius = 120;//摇杆活动范围半径
     private RudderListener listener = null; //事件回调接口
+    private float lastadian;
     public static final int ACTION_RUDDER = 1 , ACTION_ATTACK = 2; // 1：摇杆事件 2：按钮事件（未实现）
     
 	public Rudder(Context context) {
@@ -124,14 +125,16 @@ public class Rudder extends SurfaceView implements Runnable,Callback{
             }
             if(listener != null) {
                 float radian = MathUtils.getRadian(mCtrlPoint, new Point((int)event.getX(), (int)event.getY()));
-                if(len > 2 * mWheelRadius / 3)
-                	listener.onSteeringWheelChanged(ACTION_RUDDER,Rudder.this.getAngleCouvert(radian));
+                lastadian = radian;
+                if(len >= 0)
+                	listener.onSteeringWheelChanged(ACTION_RUDDER,Rudder.this.getAngleCouvert(radian),event);
                 else
-                	listener.onSteeringWheelChanged(ACTION_RUDDER,-1);
+                	listener.onSteeringWheelChanged(ACTION_RUDDER,-1,event);
             }
         }
         //如果手指离开屏幕，则摇杆返回初始位置
         if(event.getAction() == MotionEvent.ACTION_UP) {
+        	listener.onSteeringWheelChanged(ACTION_RUDDER,Rudder.this.getAngleCouvert(lastadian),event);
             mRockerPosition = new Point(mCtrlPoint);
         }
         return true;
@@ -149,7 +152,7 @@ public class Rudder extends SurfaceView implements Runnable,Callback{
     
     //回调接口
     public interface RudderListener {
-        void onSteeringWheelChanged(int action,int angle);
+        void onSteeringWheelChanged(int action,int angle,MotionEvent e);
     }
 }
 

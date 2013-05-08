@@ -15,6 +15,7 @@ public class GravitySensor {
 	float max=0;	//不改变方向的最大值，大于该值向右转
 	long lastTime=0;
 	long currentTime=0;
+	private String lastDirect = "";
 	
 	///开始监听加速传感器
 	public void Listen(SensorManager sensorManager,String _ip)
@@ -36,7 +37,20 @@ public class GravitySensor {
 			{
 	            @SuppressWarnings("deprecation")
 				float num=e.values[SensorManager.DATA_Y];
-	            WheelJoyStick.sendMsg(String.valueOf(num));
+	            if(num > 3.0 && !lastDirect.equals("RIGHW")){
+	            	lastDirect="RIGHW";
+	            	WheelJoyStick.sendMsg("LEFTH");
+	            	WheelJoyStick.sendMsg("RIGHW");
+	            }
+	            else if(num < -3.0 && !lastDirect.equals("LEFTW")){
+	            	lastDirect="LEFTW";
+	            	WheelJoyStick.sendMsg("RIGHH");
+	            	WheelJoyStick.sendMsg("LEFTW");
+	            }
+	            else if((num > -3.0 && num < 3.0) && !lastDirect.equals("STILL")){
+	            	lastDirect="STILL";
+	            	WheelJoyStick.sendMsg("STILL");
+	            }
 	            lastTime=currentTime;
 			}
 		}};

@@ -22,9 +22,10 @@ import android.widget.Button;
 
 public class CommonJoyStick extends Activity {
 	String mIp;
-	final static String[] keysUp = {"KE_Y","KE_X","KE_AU","KE_BU","KE_SU","KEY_EU"};
-	final static String[] keysDonw = {"KE_Y","KE_X","KE_AD","KE_BD","KE_SD","KEY_ED"};
-
+	final static String[] keysUp = {"KE_YU","KE_XU","KE_AU","KE_BU","KE_SU","KE_EU"};
+	final static String[] keysDonw = {"KE_YD","KE_XD","KE_AD","KE_BD","KE_SD","KE_ED"};
+	String lastDirect = "";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -38,16 +39,49 @@ public class CommonJoyStick extends Activity {
 		rudder.setRudderListener(new RudderListener() {
 			
 			@Override
-			public void onSteeringWheelChanged(int action, int angle) {
+			public void onSteeringWheelChanged(int action, int angle, MotionEvent e) {
 				// TODO Auto-generated method stub
-				if(angle >= 360 - 30 || angle < 30){
-					sendMsg("righ");
-				}else if(angle >= 60 && angle < 120){
-					sendMsg("UPTO");
-				}else if(angle >= 150 && angle < 210){
-					sendMsg("LEFT");
-				}else{
-					sendMsg("DOWN");
+				switch (e.getAction()){
+				case MotionEvent.ACTION_MOVE:
+					if(angle >= 360 - 30 || angle < 30){
+						if(!lastDirect.equals("RIGHD")){
+							if(!lastDirect.equals(""))
+								sendMsg(lastDirect.substring(0, 4) +"U");
+							
+							sendMsg("RIGHD");
+							getVibator();
+							lastDirect = "RIGHD";
+						}
+					}else if(angle >= 60 && angle < 120){
+						if(!lastDirect.equals("UPTOD")){
+							if(!lastDirect.equals(""))
+								sendMsg(lastDirect.substring(0, 4) +"U");
+							sendMsg("UPTOD");
+							getVibator();
+							lastDirect = "UPTOD";
+						}
+					}else if(angle >= 150 && angle < 210){
+						if(!lastDirect.equals("LEFTD")){
+							if(!lastDirect.equals(""))
+								sendMsg(lastDirect.substring(0, 4) +"U");
+							sendMsg("LEFTD");
+							getVibator();
+							lastDirect = "LEFTD";
+						}
+					}else{
+						if(!lastDirect.equals("DOWND")){
+							if(!lastDirect.equals(""))
+								sendMsg(lastDirect.substring(0, 4) +"U");
+							sendMsg("DOWND");
+							getVibator();
+							lastDirect = "DOWND";
+						}
+					}
+					break;
+				case MotionEvent.ACTION_UP:
+					sendMsg(lastDirect.substring(0, 4) +"U");
+					lastDirect = "";
+					break;
 				}
 			}
 		});
@@ -70,7 +104,6 @@ public class CommonJoyStick extends Activity {
 								break;
 							case MotionEvent.ACTION_UP:
 								sendMsg(keysUp[index]);
-								getVibator();
 								break;
 							default :
 								break;
@@ -90,7 +123,7 @@ public class CommonJoyStick extends Activity {
 			public void run() {
 				Socket socket = null;
 				try {
-					socket = new Socket("192.168.1.3", 8885);
+					socket = new Socket("192.168.1.4", 8885);
 					PrintWriter out = new PrintWriter(new BufferedWriter(  
 		                    new OutputStreamWriter(socket.getOutputStream())), true);
 					
@@ -103,7 +136,7 @@ public class CommonJoyStick extends Activity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+					// TODO Auto-generated catch blockwz
 					e.printStackTrace();
 				}finally {  
 		            try {
